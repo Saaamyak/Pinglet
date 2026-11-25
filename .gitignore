@@ -1,0 +1,31 @@
+# XcodeGen generates this from project.yml — never commit it
+*.xcodeproj
+*.xcworkspace
+
+# Xcode build output & user state
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Secrets / signing (never commit)
+*.mobileprovision
+*.p12
+*.cer
+
+# Impeccable design-tool config
+.impeccable/
+
+# Private working docs — never on GitHub
+CLAUDE.md
+SESSION_CONTEXT.md
+POA.md
+REQUIREMENTS.md

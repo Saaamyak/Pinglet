@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pinglet — Apple-style concept</title>
+<style>
+/* ============================================================
+   Pinglet — redesign in Apple.com's visual language.
+   Clean white + black sections, SF Pro, huge tight headlines,
+   generous negative space, restrained soft color. The app is
+   presented like an Apple product page. Single committed look.
+   ============================================================ */
+:root{
+  --black:#1d1d1f;      /* Apple near-black ink */
+  --white:#ffffff;
+  --gray-bg:#f5f5f7;    /* Apple signature light gray */
+  --ink-2:#6e6e73;      /* Apple secondary text */
+  --ink-3:#636366;      /* tertiary — darkened from Apple #86868b to meet contrast */
+  --hair:#d2d2d7;
+  --blue:#0071e3;       /* Apple link blue */
+  /* soft list colors, tuned to Apple system hues */
+  --c-work:#5e5ce6;     /* indigo */
+  --c-home:#ff9f0a;     /* orange */
+  --c-health:#ff6482;   /* soft pink */
+  --c-personal:#30c7b5; /* teal */
+  --sf:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sf);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;line-height:1.47;}
+::selection{background:#b7dbff}
+img{max-width:100%}
+
+/* ---------- global layout ---------- */
+.band{padding:clamp(72px,11vw,128px) 22px}
+.wrap{max-width:1000px;margin:0 auto}
+.narrow{max-width:720px;margin:0 auto}
+.eyebrow{font-size:clamp(17px,2vw,21px);font-weight:600;letter-spacing:-.01em;margin-bottom:10px}
+h1,h2,h3{letter-spacing:-.025em;font-weight:680;text-wrap:balance;line-height:1.05}
+h1{font-size:clamp(40px,8vw,80px)}
+h2{font-size:clamp(32px,5.4vw,56px)}
+h3{font-size:clamp(22px,3vw,30px);font-weight:620}
+.dek{font-size:clamp(19px,2.6vw,27px);font-weight:500;color:var(--ink-2);letter-spacing:-.01em;line-height:1.3;margin-top:16px}
+.center{text-align:center}
+
+/* section grounds */
+.on-white{background:var(--white);color:var(--black)}
+.on-gray{background:var(--gray-bg);color:var(--black)}
+.on-black{background:#000;color:#f5f5f7}
+.on-black .dek,.on-black .eyebrow{color:#a1a1a6}
+.on-black .eyebrow{color:#2fd0ff}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.08)}
+.navin{max-width:1000px;margin:0 auto;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.brand{font-weight:600;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+.brand .mk{width:19px;height:19px;border-radius:6px;background:var(--c-work);position:relative}
+.brand .mk::after{content:"";position:absolute;left:5.5px;top:4px;width:5px;height:8.5px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.navlinks{display:flex;gap:26px;font-size:13px;color:var(--ink-2);font-weight:450}
+.navlinks a{color:inherit;text-decoration:none}
+@media(max-width:620px){.navlinks{display:none}}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding-top:clamp(56px,9vw,96px)}
+.hero h1{margin-bottom:6px}
+.hero .grad{color:var(--c-work)}
+.hero .dek{max-width:30ch;margin:16px auto 0}
+.stage{margin-top:clamp(40px,6vw,72px);display:flex;justify-content:center}
+
+/* ---------- phone ---------- */
+.phone{width:296px;border-radius:52px;padding:13px;background:linear-gradient(150deg,#3a3a3f,#101013);
+  box-shadow:0 2px 6px rgba(0,0,0,.3),0 40px 80px rgba(0,0,0,.28);flex:0 0 auto}
+.screen{position:relative;height:620px;border-radius:40px;overflow:hidden;isolation:isolate;background:var(--wall)}
+.notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:98px;height:27px;background:#000;border-radius:16px;z-index:40}
+.sbar{position:absolute;top:0;left:0;right:0;height:46px;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 26px 0;font-size:14px;font-weight:620;color:var(--ink);z-index:30}
+.sbar .r{display:flex;gap:6px;align-items:center}
+.batt{width:24px;height:12px;border:1.5px solid var(--ink);border-radius:3px;position:relative;opacity:.9}
+.batt::after{content:"";position:absolute;inset:1.6px;right:7px;background:var(--ink);border-radius:1px}
+
+/* device palette (light default / dark variant) */
+.dev{--ink:#1d1d1f;--ink2:#6e6e73;
+  --wall:linear-gradient(170deg,#fbfbfd 0%,#f1f0f6 55%,#eef4f3 100%);
+  --sheet:#ffffff;--rowbrd:rgba(0,0,0,.07);--bar:rgba(255,255,255,.7);--barbrd:rgba(0,0,0,.06);}
+.dev.dark{--ink:#f5f5f7;--ink2:#98989d;
+  --wall:linear-gradient(170deg,#1c1c22 0%,#15151b 55%,#101418 100%);
+  --sheet:#1c1c1e;--rowbrd:rgba(255,255,255,.09);--bar:rgba(38,38,42,.64);--barbrd:rgba(255,255,255,.08);}
+
+.app{position:absolute;inset:0;padding:54px 22px 0;color:var(--ink);z-index:10;overflow:hidden}
+.big-title{font-size:33px;font-weight:720;letter-spacing:-.03em;margin-bottom:2px}
+.sub{font-size:14px;color:var(--ink2);font-weight:500;margin-bottom:20px}
+.grp{font-size:12px;font-weight:650;letter-spacing:.02em;color:var(--ink2);margin:20px 2px 4px;text-transform:uppercase}
+.grp.first{margin-top:4px}
+.row{display:flex;align-items:flex-start;gap:14px;padding:13px 2px}
+.row+.row{border-top:1px solid var(--rowbrd)}
+.tick{width:23px;height:23px;border-radius:50%;flex:0 0 auto;border:2px solid var(--tc,var(--ink2));position:relative;cursor:pointer;transition:.15s}
+.row.done .tick{background:var(--tc);border-color:var(--tc)}
+.tick::after{content:"";position:absolute;left:6.5px;top:3px;width:5.5px;height:10px;border:solid #fff;border-width:0 2.2px 2.2px 0;
+  transform:rotate(45deg) scale(0);opacity:0;transition:.15s}
+.row.done .tick::after{transform:rotate(45deg) scale(1);opacity:1}
+.rtx{min-width:0;flex:1}
+.ttl{font-size:16px;font-weight:530;letter-spacing:-.01em;color:var(--ink)}
+.row.done .ttl{color:var(--ink2);text-decoration:line-through}
+.meta{font-size:12.5px;color:var(--ink2);font-weight:500;display:flex;align-items:center;gap:8px;margin-top:4px}
+.meta .time{font-variant-numeric:tabular-nums}
+.meta .time.over{color:#ff453a;font-weight:600}
+.ldot{width:8px;height:8px;border-radius:50%;background:var(--tc)}
+.lbl{color:var(--ink2)}
+
+.bar{position:absolute;left:16px;right:16px;bottom:18px;height:60px;border-radius:32px;z-index:25;
+  display:flex;align-items:center;justify-content:space-around;color:var(--ink2);
+  background:var(--bar);-webkit-backdrop-filter:blur(28px) saturate(1.8);backdrop-filter:blur(28px) saturate(1.8);
+  border:1px solid var(--barbrd);box-shadow:0 8px 26px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.4)}
+.ti{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:550}
+.ti .g{width:21px;height:21px;border-radius:7px;border:2px solid currentColor;opacity:.85}
+.ti.on{color:var(--ink)}.ti.on .g{background:currentColor}
+.plus{position:absolute;right:18px;bottom:90px;width:60px;height:60px;border-radius:50%;z-index:26;display:grid;place-items:center;
+  background:var(--c-work);box-shadow:0 8px 20px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.35)}
+.plus::before,.plus::after{content:"";position:absolute;background:#fff;border-radius:2px}
+.plus::before{width:22px;height:2.8px}.plus::after{width:2.8px;height:22px}
+
+/* add sheet variant */
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.32);z-index:50}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:51;background:var(--sheet);border-radius:34px 34px 0 0;
+  padding:12px 22px 26px;box-shadow:0 -12px 50px rgba(0,0,0,.3)}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--ink2);opacity:.35;margin:5px auto 18px}
+.sheet h4{font-size:21px;font-weight:680;letter-spacing:-.02em;margin-bottom:18px;color:var(--ink)}
+.field{background:var(--wall);border:1px solid var(--rowbrd);border-radius:14px;padding:15px 16px;margin-bottom:11px;
+  font-size:16px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.field .lab{color:var(--ink2);font-size:14px}.field .val{color:var(--ink2);font-size:14px}
+.caret{display:inline-block;width:2px;height:19px;background:var(--c-work);vertical-align:-3px;margin-left:1px;animation:bl 1.1s step-end infinite}
+@keyframes bl{50%{opacity:0}}
+.chips{display:flex;gap:9px;margin:4px 0 18px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:999px;font-size:13.5px;font-weight:550;
+  background:var(--wall);border:1px solid var(--rowbrd);color:var(--ink2)}
+.chip i{width:10px;height:10px;border-radius:50%}
+.chip.sel{background:color-mix(in srgb,var(--c-home) 16%,var(--sheet));border:1.5px solid var(--c-home);color:var(--ink)}.chip.sel i{background:var(--c-home)}
+.save{width:100%;border:0;border-radius:15px;padding:16px;font:inherit;font-size:16px;font-weight:600;color:#fff;background:var(--c-work)}
+
+/* ---------- feature grid ---------- */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:clamp(40px,6vw,64px)}
+@media(max-width:760px){.feat{grid-template-columns:1fr}}
+.tile{background:var(--gray-bg);border-radius:28px;padding:40px 36px;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+.on-black .tile{background:#141416}
+.tile .k{font-size:14px;font-weight:600;color:var(--c-work)}
+.tile h3{letter-spacing:-.02em}
+.tile p{color:var(--ink-2);font-size:16px;max-width:34ch}
+.on-black .tile p{color:#a1a1a6}
+
+/* ---------- widgets (redesigned, interactive) ---------- */
+.widgets-row{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:clamp(36px,5vw,56px)}
+.wwrap{display:flex;flex-direction:column;align-items:center;gap:13px}
+.wcap{font-size:13px;color:var(--ink-3);font-weight:500}
+.on-black .wcap{color:#98989d}
+.widget{position:relative;overflow:hidden;background:var(--wall);box-shadow:0 22px 54px rgba(0,0,0,.26)}
+.wg{position:absolute;inset:0;background:var(--bar);-webkit-backdrop-filter:blur(22px) saturate(1.8);backdrop-filter:blur(22px) saturate(1.8)}
+.widget.sm{width:170px;height:170px;border-radius:34px}
+.widget.md{width:360px;height:170px;border-radius:34px}
+.wi{position:relative;z-index:2;padding:17px 18px;height:100%;display:flex;flex-direction:column;color:var(--ink)}
+.wh{display:flex;justify-content:space-between;align-items:flex-start}
+.wh .d{font-size:15px;font-weight:720;letter-spacing:-.02em}
+.wsub{font-size:12px;font-weight:550;color:var(--ink2);margin-top:1px}
+.wapp{width:18px;height:18px;border-radius:6px;background:var(--c-work);position:relative;box-shadow:0 1px 2px rgba(0,0,0,.2);flex:0 0 auto}
+.wapp::after{content:"";position:absolute;left:5.5px;top:4px;width:4px;height:7px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.wlist{display:flex;flex-direction:column;margin-top:auto}
+.wr{display:flex;align-items:center;gap:11px;padding:7px 0;cursor:pointer}
+.wr+.wr{border-top:1px solid var(--rowbrd)}
+.wt{width:20px;height:20px;border-radius:50%;border:2px solid var(--tc);flex:0 0 auto;position:relative;transition:.15s}
+.wr.done .wt{background:var(--tc);border-color:var(--tc)}
+.wr.done .wt::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.wtt{font-size:14px;font-weight:500;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wr.done .wtt{color:var(--ink2);text-decoration:line-through}
+.wtm{font-size:12.5px;font-weight:600;color:var(--ink2);font-variant-numeric:tabular-nums}
+.wtm.over{color:#ff6b5e}
+/* medium — summary + up-next split */
+.wsplit{display:flex;gap:18px;height:100%}
+.wleft{width:96px;flex:0 0 auto;display:flex;flex-direction:column;justify-content:space-between;padding-right:18px;border-right:1px solid var(--rowbrd)}
+.wdate{font-size:13px;font-weight:650;color:var(--ink2);letter-spacing:-.01em}
+.wbig{font-size:38px;font-weight:720;letter-spacing:-.03em;line-height:1}
+.wbig span{font-size:19px;color:var(--ink2);font-weight:600}
+.wsmall{font-size:12px;color:var(--ink2);font-weight:550;margin-top:2px}
+.wbar{height:7px;border-radius:5px;background:color-mix(in srgb,var(--ink) 15%,transparent);overflow:hidden}
+.wbar i{display:block;height:100%;background:var(--c-work);border-radius:5px}
+.wright{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.wup{font-size:11px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px}
+.wright .wlist{margin-top:0}
+
+/* ---------- closing ---------- */
+.cta{text-align:center}
+.cta .pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.pill-btn{font-size:17px;font-weight:500;padding:12px 24px;border-radius:999px;background:var(--c-work);color:#fff;border:0}
+.pill-btn.ghost{background:transparent;color:var(--blue);border:0}
+footer{padding:30px 22px;background:var(--gray-bg);color:var(--ink-3);font-size:12px;text-align:center;border-top:1px solid var(--hair)}
+.note{font-size:13px;color:var(--ink-3);margin-top:30px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navin">
+    <div class="brand"><span class="mk"></span>Pinglet</div>
+    <div class="navlinks"><a href="#today">Today</a><a href="#home">Home Screen</a><a href="#capture">Capture</a><a href="#glass">Liquid Glass</a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="band on-white hero" id="today">
+  <div class="eyebrow" style="color:var(--c-work)">Pinglet</div>
+  <h1>Your day,<br><span class="grad">beautifully reminded.</span></h1>
+  <p class="dek">A calm to-do list and reminders app for iPhone. On your Home Screen. All on your device.</p>
+  <div class="stage">
+    <div class="phone"><div class="screen dev">
+      <div class="notch"></div>
+      <div class="sbar"><span>9:41</span><span class="r"><span class="batt"></span></span></div>
+      <div class="app">
+        <div class="big-title">Today</div>
+        <div class="sub">Tuesday, 25 November · 1 of 6 done</div>
+        <div class="grp first">Overdue</div>
+        <div class="row" style="--tc:var(--c-home)" onclick="this.classList.toggle('done')">
+          <span class="tick"></span><div class="rtx"><div class="ttl">Call the plumber about the leak</div>
+          <div class="meta"><span class="time over">9:30 AM</span><span class="ldot"></span><span class="lbl">Home</span></div></div>
+        </div>
+        <div class="grp">Today</div>
+        <div class="row" style="--tc:var(--c-work)" onclick="this.classList.toggle('done')">
+          <span class="tick"></span><div class="rtx"><div class="ttl">Submit expense report</div>
+          <div class="meta"><span class="time">11:00 AM</span><span class="ldot"></span><span class="lbl">Work</span></div></div>
+        </div>
+        <div class="row" style="--tc:var(--c-health)" onclick="this.classList.toggle('done')">
+          <span class="tick"></span><div class="rtx"><div class="ttl">Pick up prescription</div>
+          <div class="meta"><span class="time">2:00 PM</span><span class="ldot"></span><span class="lbl">Health</span></div></div>
+        </div>
+        <div class="row" style="--tc:var(--c-work)" onclick="this.classList.toggle('done')">
+          <span class="tick"></span><div class="rtx"><div class="ttl">Review Aarav’s pull request</div>
+          <div class="meta"><span class="time">4:30 PM</span><span class="ldot"></span><span class="lbl">Work</span></div></div>
+        </div>
+      </div>
+      <div class="plus" aria-hidden="true"></div>
+      <div class="bar">
+        <div class="ti on"><span class="g"></span>Today</div>
+        <div class="ti"><span class="g"></span>Lists</div>
+        <div class="ti"><span class="g"></span>Done</div>
+      </div>
+    </div></div>
+  </div>
+  <p class="note">Tap any circle to complete a task.</p>
+</section>
+
+<!-- HOME SCREEN / WIDGETS (dark, Apple product-page style) -->
+<section class="band on-black center" id="home">
+  <div class="narrow">
+    <div class="eyebrow">On your Home Screen</div>
+    <h2>A glance is all it takes.</h2>
+    <p class="dek">Your next tasks, right where you look first. Tap a circle to check it off — the app never has to open.</p>
+  </div>
+  <div class="widgets-row">
+    <div class="wwrap">
+      <div class="widget sm"><div class="dev dark" style="position:absolute;inset:0"><div style="position:absolute;inset:0;background:var(--wall)"></div><div class="wg"></div></div>
+        <div class="wi dev dark">
+          <div class="wh"><div><div class="d">Today</div><div class="wsub">1 of 6 done</div></div><span class="wapp"></span></div>
+          <div class="wlist">
+            <div class="wr" style="--tc:var(--c-home)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Call the plumber</span><span class="wtm over">9:30</span></div>
+            <div class="wr" style="--tc:var(--c-work)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Expense report</span><span class="wtm">11:00</span></div>
+            <div class="wr" style="--tc:var(--c-health)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Prescription</span><span class="wtm">2:00</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="wcap">Small · tap to complete</div>
+    </div>
+    <div class="wwrap">
+      <div class="widget md"><div class="dev dark" style="position:absolute;inset:0"><div style="position:absolute;inset:0;background:var(--wall)"></div><div class="wg"></div></div>
+        <div class="wi dev dark">
+          <div class="wsplit">
+            <div class="wleft">
+              <div class="wdate">Tue 25</div>
+              <div><div class="wbig">1<span>/6</span></div><div class="wsmall">done today</div></div>
+              <div class="wbar"><i style="width:17%"></i></div>
+            </div>
+            <div class="wright">
+              <div class="wup">Up next</div>
+              <div class="wlist">
+                <div class="wr" style="--tc:var(--c-home)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Call the plumber</span><span class="wtm over">9:30</span></div>
+                <div class="wr" style="--tc:var(--c-work)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Submit expense report</span><span class="wtm">11:00</span></div>
+                <div class="wr" style="--tc:var(--c-health)" onclick="this.classList.toggle('done')"><span class="wt"></span><span class="wtt">Pick up prescription</span><span class="wtm">2:00</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wcap">Medium · tap to complete</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPTURE / ADD (light) -->
+<section class="band on-white" id="capture">
+  <div class="narrow center">
+    <div class="eyebrow" style="color:var(--c-work)">Capture</div>
+    <h2>Add a task in seconds.</h2>
+    <p class="dek">One tap, type, pick a time. Reminders that actually reach you — even with the app closed.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen dev">
+      <div class="notch"></div>
+      <div class="sbar"><span>9:41</span><span class="r"><span class="batt"></span></span></div>
+      <div class="app" style="filter:brightness(.97)">
+        <div class="big-title">Today</div><div class="sub">Tuesday, 25 November</div>
+        <div class="grp first">Today</div>
+        <div class="row" style="--tc:var(--c-work)"><span class="tick"></span><div class="rtx"><div class="ttl">Submit expense report</div></div></div>
+        <div class="row" style="--tc:var(--c-health)"><span class="tick"></span><div class="rtx"><div class="ttl">Pick up prescription</div></div></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <h4>New Task</h4>
+        <div class="field">Water the plants<span class="caret"></span></div>
+        <div class="field"><span class="lab">Remind me</span><span class="val">Today · 6:00 PM ›</span></div>
+        <div class="field"><span class="lab">Repeat</span><span class="val">Never ›</span></div>
+        <div class="chips">
+          <span class="chip sel"><i></i>Home</span>
+          <span class="chip"><i style="background:var(--c-work)"></i>Work</span>
+          <span class="chip"><i style="background:var(--c-health)"></i>Health</span>
+          <span class="chip"><i style="background:var(--c-personal)"></i>Personal</span>
+        </div>
+        <button class="save">Add Task</button>
+      </div>
+    </div></div>
+  </div>
+  <div class="wrap">
+    <div class="feat">
+      <div class="tile"><span class="k">Reminders</span><h3>Right on time.</h3><p>A local notification at the minute you set. Complete it, and the alert quietly cancels itself.</p></div>
+      <div class="tile"><span class="k">Lists &amp; color</span><h3>Sorted at a glance.</h3><p>Work, Home, Health, Personal — each with its own soft color, so your day reads in a second.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIQUID GLASS (black) -->
+<section class="band on-black center" id="glass">
+  <div class="narrow">
+    <div class="eyebrow">Liquid Glass</div>
+    <h2>Looks right, day or night.</h2>
+    <p class="dek">Built for iOS 26. Translucent surfaces that pick up your wallpaper and adapt to light and dark — automatically.</p>
+  </div>
+  <div class="stage" style="gap:24px;flex-wrap:wrap">
+    <div class="phone" style="width:248px"><div class="screen dev" style="height:520px">
+      <div class="notch" style="width:84px;height:23px"></div>
+      <div class="sbar" style="font-size:12.5px;padding-top:14px"><span>9:41</span><span class="r"><span class="batt" style="width:22px;height:11px"></span></span></div>
+      <div class="app" style="padding-top:48px">
+        <div class="big-title" style="font-size:27px">Today</div><div class="sub" style="font-size:12.5px;margin-bottom:14px">Light</div>
+        <div class="row" style="--tc:var(--c-home);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Call the plumber</div><div class="meta" style="font-size:11.5px"><span class="time over">9:30 AM</span></div></div></div>
+        <div class="row" style="--tc:var(--c-work);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Submit expense report</div></div></div>
+        <div class="row" style="--tc:var(--c-health);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Pick up prescription</div></div></div>
+      </div>
+    </div></div>
+    <div class="phone" style="width:248px"><div class="screen dev dark" style="height:520px">
+      <div class="notch" style="width:84px;height:23px"></div>
+      <div class="sbar" style="font-size:12.5px;padding-top:14px"><span>9:41</span><span class="r"><span class="batt" style="width:22px;height:11px"></span></span></div>
+      <div class="app" style="padding-top:48px">
+        <div class="big-title" style="font-size:27px">Today</div><div class="sub" style="font-size:12.5px;margin-bottom:14px">Dark</div>
+        <div class="row" style="--tc:var(--c-home);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Call the plumber</div><div class="meta" style="font-size:11.5px"><span class="time over">9:30 AM</span></div></div></div>
+        <div class="row" style="--tc:var(--c-work);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Submit expense report</div></div></div>
+        <div class="row" style="--tc:var(--c-health);padding:10px 2px"><span class="tick" style="width:21px;height:21px"></span><div class="rtx"><div class="ttl" style="font-size:14.5px">Pick up prescription</div></div></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="band on-gray cta">
+  <div class="narrow">
+    <h2>Ready to build it?</h2>
+    <p class="dek">This is the look. Next, we turn it into a real SwiftUI app and put it on your iPhone.</p>
+    <div class="pills">
+      <button class="pill-btn">Lock this direction</button>
+      <button class="pill-btn ghost">Tweak something ›</button>
+    </div>
+  </div>
+</section>
+
+<footer>Pinglet concept · Apple-style design study · local-only, no accounts. Mockup — not an Apple product.</footer>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+# XcodeGen project definition — the source of truth for Pinglet.
+# Edit this file, then run `xcodegen generate` to (re)create Pinglet.xcodeproj.
+# Never hand-edit the .xcodeproj (it's generated and gitignored).
+name: Pinglet
+options:
+  bundleIdPrefix: com.samyakgoel
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    DEVELOPMENT_TEAM: "JB7848HW75"   # Samyak Goel (Personal Team)
+
+targets:
+  # ---- The app ----
+  Pinglet:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Shared
+      - path: Pinglet
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.samyakgoel.Pinglet
+        PRODUCT_NAME: Pinglet
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: Pinglet/Pinglet.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_CFBundleDisplayName: Pinglet
+        ENABLE_PREVIEWS: YES
+    dependencies:
+      - target: PingletWidgetExtension
+        embed: true
+
+  # ---- The home-screen widget ----
+  PingletWidgetExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Shared
+      - path: PingletWidget
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.samyakgoel.Pinglet.widget
+        PRODUCT_NAME: PingletWidget
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: PingletWidget/PingletWidget.entitlements
+        TARGETED_DEVICE_FAMILY: "1"
+    info:
+      path: PingletWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Pinglet
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension

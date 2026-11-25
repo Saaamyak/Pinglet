@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7E7CF6"/>
+      <stop offset="1" stop-color="#4F46E0"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- full-bleed background (iOS applies the rounded mask) -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#sheen)"/>
+
+  <!-- main completion ring (echoes the app's task circles) -->
+  <circle cx="486" cy="556" r="210" fill="none" stroke="#ffffff" stroke-width="62"/>
+
+  <!-- checkmark -->
+  <path d="M 388 560 L 456 628 L 600 474"
+        fill="none" stroke="#ffffff" stroke-width="62"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the "ping": a dot radiating, top-right -->
+  <g stroke="#ffffff" fill="none" stroke-linecap="round">
+    <circle cx="742" cy="300" r="112" stroke-width="12" opacity="0.26"/>
+    <circle cx="742" cy="300" r="70"  stroke-width="15" opacity="0.5"/>
+  </g>
+  <circle cx="742" cy="300" r="30" fill="#ffffff"/>
+</svg>
